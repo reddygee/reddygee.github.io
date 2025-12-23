@@ -5,18 +5,15 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - Personal Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>Portfolio Details - Doom Emacs View</title>
+  <meta content="Project detail buffer" name="description">
+  <meta content="portfolio, surya reddy, doom emacs" name="keywords">
 
-  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -24,77 +21,95 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: MyResume - v4.3.0
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
-<body>
-
-  <main id="main">
-
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-8">
-            <div class="portfolio-details-slider swiper-container">
-              <div class="swiper-wrapper align-items-center">
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="">
-                </div>
-
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="portfolio-info">
-              <h3>Project information</h3>
-              <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-            </div>
-            <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Details Section -->
-
-  </main><!-- End #main -->
-
+<body class="doom-body">
   <div id="preloader"></div>
+
+  <div class="emacs-frame" data-aos="fade-up">
+    <div class="frame-titlebar">
+      <div class="frame-brand">GNU Emacs 29.1 (Doom) — Portfolio detail</div>
+      <div class="frame-tabs">
+        <span class="tab">~/surya/portfolio.org</span>
+        <span class="tab active">workdir/details.org</span>
+      </div>
+      <div class="frame-state">UTF-8 | Git: clean | Narrow</div>
+    </div>
+
+    <div class="frame-body">
+      <aside class="frame-sidebar">
+        <div class="sidebar-section">
+          <p class="sidebar-label">buffers</p>
+          <nav class="sidebar-nav">
+            <a href="index.html#portfolio">../portfolio</a>
+            <a href="#portfolio-details" class="active">details.org</a>
+          </nav>
+        </div>
+        <div class="sidebar-section">
+          <p class="sidebar-label">social</p>
+          <div class="sidebar-links">
+            <a href="https://github.com/reddygee" target="_blank"><i class='bx bxl-github'></i> github</a>
+            <a href="https://www.linkedin.com/in/gujjureddy/" target="_blank"><i class="bx bxl-linkedin"></i> linkedin</a>
+            <a href="https://devcharmander.medium.com" target="_blank"><i class='bx bxl-medium'></i> medium</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="frame-editor">
+        <section id="portfolio-details" class="buffer">
+          <div class="buffer-header">
+            <span class="buffer-path">~/surya/portfolio/workdir/details.org</span>
+            <span class="buffer-mode">ORG | preview</span>
+          </div>
+          <div class="buffer-body">
+            <div class="org-heading">* Project information</div>
+            <div class="detail-grid">
+              <div class="detail-visual">
+                <div class="pane-title">;; previews</div>
+                <div class="detail-gallery">
+                  <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="Project preview 1">
+                  <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="Project preview 2">
+                  <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="Project preview 3">
+                </div>
+              </div>
+              <div class="detail-meta">
+                <div class="timeline">
+                  <div class="timeline-item">
+                    <div class="timeline-title">Category</div>
+                    <div class="timeline-meta">Web design</div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-title">Client</div>
+                    <div class="timeline-meta">ASU Company</div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-title">Project date</div>
+                    <div class="timeline-meta">01 March, 2020</div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-title">Project URL</div>
+                    <div class="timeline-meta"><a href="#" target="_blank">www.example.com</a></div>
+                  </div>
+                </div>
+                <div class="org-heading small">** Notes</div>
+                <p class="org-text">Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modeline">
+      <span class="modeline-left">-- VIEW --</span>
+      <span class="modeline-center">details.org</span>
+      <span class="modeline-right">Ln 1, Col 1 | Doom Emacs skin</span>
+    </div>
+  </div>
+
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -104,10 +119,7 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/typed.js/typed.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-
-  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
 </body>
 
 </html>

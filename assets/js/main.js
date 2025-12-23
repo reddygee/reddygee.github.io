@@ -61,14 +61,48 @@
   onscroll(document, navbarlinksActive)
 
   /**
-   * Scrolls to an element with header offset
+   * Tabs handling
+   */
+  const tabSections = Array.from(document.querySelectorAll('.tab-section'));
+  const tabButtons = Array.from(document.querySelectorAll('.buffer-tab[data-target]'));
+  const frameTabsContainer = document.getElementById('frame-tabs');
+
+  function activateTab(targetId) {
+    if (!targetId) targetId = '#hero';
+    const hasMatch = tabSections.some(sec => `#${sec.id}` === targetId);
+    const resolvedTarget = hasMatch ? targetId : '#hero';
+    document.querySelectorAll('.tab-section').forEach(sec => {
+      const isMatch = `#${sec.id}` === resolvedTarget;
+      sec.classList.toggle('active', isMatch);
+      sec.hidden = !isMatch;
+    });
+    document.querySelectorAll('.buffer-tab[data-target]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.target === resolvedTarget);
+    });
+    if (frameTabsContainer) {
+      frameTabsContainer.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.target === resolvedTarget);
+      });
+    }
+    const editor = document.querySelector('.frame-editor');
+    if (editor) editor.scrollTop = 0;
+  }
+
+  /**
+   * Scrolls to an element with header offset or switches tab
    */
   const scrollto = (el) => {
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos,
-      behavior: 'smooth'
-    })
+    const target = select(el);
+    if (!target) return;
+    if (target.classList.contains('tab-section')) {
+      activateTab(el);
+    } else {
+      let elementPos = target.offsetTop
+      window.scrollTo({
+        top: elementPos,
+        behavior: 'smooth'
+      })
+    }
   }
 
   /**
@@ -168,84 +202,119 @@
     })
   }
 
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
+  const bufferTabsContainer = document.getElementById('buffer-tabs');
+
+  if (tabButtons.length) {
+    // Populate frame tabs to mirror buffer tabs
+    if (frameTabsContainer) {
+      frameTabsContainer.innerHTML = '';
+      tabButtons.forEach(btn => {
+        const clone = document.createElement('span');
+        clone.className = `tab${btn.classList.contains('active') ? ' active' : ''}`;
+        clone.textContent = btn.dataset.label || btn.textContent;
+        clone.dataset.target = btn.dataset.target;
+        clone.addEventListener('click', () => activateTab(btn.dataset.target));
+        frameTabsContainer.appendChild(clone);
       });
+    }
 
-      let portfolioFilters = select('#portfolio-flters li', true);
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activateTab(btn.dataset.target);
+        if (frameTabsContainer) {
+          frameTabsContainer.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.target === btn.dataset.target);
+          });
+        }
+      });
+    });
+  }
 
-      on('click', '#portfolio-flters li', function(e) {
+  // Allow clicking the mirrored frame tabs to switch buffers
+  if (frameTabsContainer) {
+    frameTabsContainer.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target && target.classList.contains('tab') && target.dataset.target) {
+        activateTab(target.dataset.target);
+      }
+    });
+  }
+
+  // Allow clicking buffer tab bar (event delegation) to switch buffers
+  if (bufferTabsContainer) {
+    bufferTabsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.buffer-tab[data-target]');
+      if (btn) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
+        activateTab(btn.dataset.target);
+      }
+    });
+  }
 
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
+  // Set initial active tab state explicitly
+  const defaultTab = tabButtons.find(btn => btn.classList.contains('active')) || tabButtons[0];
+  if (defaultTab) {
+    activateTab(defaultTab.dataset.target);
+  } else {
+    activateTab('#hero');
+  }
+
+  /**
+   * Doom-style keybindings
+   */
+  const keyBindings = [
+    { seq: ['SPC', 'f', 'p'], action: () => activateTab('#portfolio') },
+    { seq: ['SPC', 'm'], action: () => { window.location.href = 'mailto:mailsuryareddy3301@gmail.com'; } },
+    { seq: ['SPC', 'n'], action: () => { window.open('https://devcharmander.medium.com', '_blank'); } },
+    { seq: ['SPC', 'a'], action: () => activateTab('#about') },
+    { seq: ['SPC', 's'], action: () => activateTab('#skills') },
+    { seq: ['SPC', 'g'], action: () => activateTab('#game') },
+    { seq: ['SPC', 'c'], action: () => activateTab('#contact') },
+    { seq: ['SPC', 'h'], action: () => activateTab('#hero') }
+  ];
+
+  let keySequence = [];
+  let lastKeyTime = 0;
+  const sequenceTimeout = 1200;
+
+  const normalizeKey = (event) => {
+    if (event.code === 'Space') return 'SPC';
+    if (event.key && event.key.length === 1) return event.key.toLowerCase();
+    return event.key.toLowerCase();
+  };
+
+  const matchesBinding = () => {
+    return keyBindings.find(binding => {
+      if (binding.seq.length !== keySequence.length) return false;
+      return binding.seq.every((k, idx) => k === keySequence[idx]);
+    });
+  };
+
+  const resetSequence = () => {
+    keySequence = [];
+    lastKeyTime = 0;
+  };
+
+  document.addEventListener('keydown', (event) => {
+    const tag = event.target.tagName.toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || event.metaKey || event.ctrlKey) {
+      return;
     }
 
-  });
-
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
-
-  /**
-   * Initiate portfolio details lightbox 
-   */
-  const portfolioDetailsLightbox = GLightbox({
-    selector: '.portfolio-details-lightbox',
-    width: '90%',
-    height: '90vh'
-  });
-
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
+    const now = Date.now();
+    if (now - lastKeyTime > sequenceTimeout) {
+      keySequence = [];
     }
-  });
+    lastKeyTime = now;
 
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
+    keySequence.push(normalizeKey(event));
+    const binding = matchesBinding();
+    if (binding) {
+      event.preventDefault();
+      binding.action();
+      resetSequence();
+    } else if (keySequence.length > 3) {
+      keySequence.shift();
     }
   });
 
