@@ -319,6 +319,25 @@
   });
 
   /**
+   * Tetris joystick buttons
+   */
+  const joyButtons = document.querySelectorAll('.joy-btn[data-action]');
+  if (joyButtons.length) {
+    joyButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.action;
+        const event = new KeyboardEvent('keydown', {
+          key: action === 'left' ? 'ArrowLeft' :
+               action === 'right' ? 'ArrowRight' :
+               action === 'down' ? 'ArrowDown' :
+               action === 'rotate' ? 'ArrowUp' : ''
+        });
+        document.dispatchEvent(event);
+      });
+    });
+  }
+
+  /**
    * Animation on scroll
    */
   window.addEventListener('load', () => {

@@ -685,6 +685,33 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 6px;
 }
 
+.game-joystick {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.joy-btn {
+  background: #1b2031;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 6px;
+  font-family: "Fira Code", monospace;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.joy-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.joy-btn.wide {
+  grid-column: span 3;
+}
+
 .detail-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
