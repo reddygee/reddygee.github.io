@@ -1,7 +1,11 @@
-# My portfolio website
+# Surya Reddy — Doom Emacs Portfolio
 
-👋 Hi there !
+👋 Hey! This repo hosts my personal site, themed like a Doom Emacs buffer stack.
 
-The template of the webiste is downloaded from https://bootstrapmade.com/
+Key info
+- Location: Stockholm
+- Email: mailsuryareddy3301@gmail.com
+- Current: Tech Lead @ Lendo (Vend)
 
-If you are using a free template from them, please do support them by inlcuding their website link in the footer of your website.
+How to run
+- No build step. Open `index.html` directly or run `python3 -m http.server 4000` and browse to `http://localhost:4000`.
