@@ -424,8 +424,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .profile-card img {
   width: 100%;
+  height: auto;
   border-radius: 10px;
   border: 1px solid var(--border);
+  object-fit: cover;
 }
 
 .profile-meta {
@@ -846,6 +848,36 @@ h1, h2, h3, h4, h5, h6 {
 
   .hero-grid, .about-grid, .contact-grid, .detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    gap: 14px;
+  }
+
+  .profile-card {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .profile-card img {
+    max-height: 260px;
+  }
+
+  .about-details {
+    gap: 8px;
+  }
+
+  .detail-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .detail-key {
+    font-size: 13px;
+  }
+
+  .detail-val {
+    font-size: 14px;
   }
 
   .hero-pane h1 {
